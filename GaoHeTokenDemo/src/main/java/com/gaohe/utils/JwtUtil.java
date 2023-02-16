@@ -19,7 +19,7 @@ public class JwtUtil {
     //有效期为
     public static final Long JWT_TTL = 60 * 60 * 1000L;//60*60*1000  一个小时
     //设置密钥明文
-    public static final String JWT_KEY = "gaohe";
+    public static final String JWT_KEY = "gaoh";
 
     public static String getUUID(){
         String token = UUID.randomUUID().toString().replaceAll("-","");
@@ -65,6 +65,13 @@ public class JwtUtil {
     public static String createJWT(String id, String subject, Long ttlMillis){
         JwtBuilder builder = getJwtBuilder(subject, ttlMillis, id); //设置过期时间
         return builder.compact();
+    }
+
+    public static void main(String[] args) throws Exception{
+        String jwt = createJWT("2123");
+        Claims claims = parseJWT(jwt);
+        String subject = claims.getSubject();
+        System.out.println(subject);
     }
 
     /**
