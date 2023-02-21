@@ -5,4 +5,6 @@ import com.gaohe.domain.User;
 
 public interface LoginService {
     ResponseResult login(User user);
+
+    ResponseResult logout();
 }
