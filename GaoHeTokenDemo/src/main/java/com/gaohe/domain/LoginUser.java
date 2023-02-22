@@ -1,23 +1,47 @@
 package com.gaohe.domain;
 
-import lombok.AllArgsConstructor;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class LoginUser implements UserDetails {
 
     private User user;
 
+    //存储权限信息
+    private List<String> permissions;
+
+    public LoginUser(User user, List<String> permissions) {
+        this.user = user;
+        this.permissions = permissions;
+    }
+
+    @JSONField(serialize = false)
+    private List<SimpleGrantedAuthority> authorities;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if (authorities != null){
+            return authorities;
+        }
+        //把permissions中String类型的权限信息封装成SimpleGrantedAuthority对象
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        for (String permission : permissions) {
+//            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permission);
+//            authorities.add(authority);
+//        }
+        List<SimpleGrantedAuthority> authorities = permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return authorities;
     }
 
     @Override

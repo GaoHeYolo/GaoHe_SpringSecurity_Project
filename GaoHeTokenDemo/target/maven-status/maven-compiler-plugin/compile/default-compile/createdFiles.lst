@@ -1,0 +1,17 @@
+com\gaohe\mapper\UserMapper.class
+com\gaohe\service\impl\LoginServiceImpl.class
+com\gaohe\utils\RedisCache.class
+com\gaohe\domain\User.class
+com\gaohe\utils\FastJsonRedisSerializer.class
+com\gaohe\service\LoginService.class
+com\gaohe\TokenApplication.class
+com\gaohe\utils\JwtUtil.class
+com\gaohe\controller\LoginController.class
+com\gaohe\service\impl\UserDetailsServiceImpl.class
+com\gaohe\domain\LoginUser.class
+com\gaohe\filter\JwtAuthenticationTokenFilter.class
+com\gaohe\config\RedisConfig.class
+com\gaohe\controller\HelloController.class
+com\gaohe\utils\WebUtils.class
+com\gaohe\config\SecurityConfig.class
+com\gaohe\domain\ResponseResult.class

@@ -1,5 +1,6 @@
 package com.gaohe.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.Date;
 public class User implements Serializable {
     private static final long serialVersionUID = -40356785423868312L;
     //主键
+    @TableId
     private Long id;
     //用户名
     private String userName;
