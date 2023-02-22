@@ -1,6 +1,7 @@
 package com.gaohe;
 
 import com.gaohe.domain.User;
+import com.gaohe.mapper.MenuMapper;
 import com.gaohe.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,15 @@ public class MapperTest {
 //        String encode1 = passwordEncoder.encode("gh");
 //        System.out.println(encode);
 //        System.out.println(encode1);
+    }
+
+    @Autowired
+    private MenuMapper menuMapper;
+
+    @Test
+    public void SelectPermsByUserId(){
+        List<String> list = menuMapper.selectPermsByUserId(1L);
+        System.out.println(list);
     }
 
     @Test

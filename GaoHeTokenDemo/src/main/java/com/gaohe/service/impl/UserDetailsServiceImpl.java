@@ -3,6 +3,7 @@ package com.gaohe.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gaohe.domain.LoginUser;
 import com.gaohe.domain.User;
+import com.gaohe.mapper.MenuMapper;
 import com.gaohe.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MenuMapper menuMapper;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //查询用户信息
@@ -31,8 +35,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (Objects.isNull(user)) {
             throw new RuntimeException("用户名或者密码错误");
         }
-        //TODO 查询对应的权限信息
-        List<String> list = new ArrayList<>(Arrays.asList("test", "admin"));
+
+//        List<String> list = new ArrayList<>(Arrays.asList("test", "admin"));
+        List<String> list = menuMapper.selectPermsByUserId(user.getId());
         //把数据封装成UserDetails返回
         return new LoginUser(user,list);
     }
