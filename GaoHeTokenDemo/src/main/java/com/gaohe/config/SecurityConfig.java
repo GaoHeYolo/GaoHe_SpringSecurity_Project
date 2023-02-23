@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/hello").permitAll()
                 .antMatchers("/user/login").anonymous()
+                .antMatchers("/testCors").hasAuthority("system:dept:list")
                 .anyRequest().authenticated();
 
         //添加过滤器
